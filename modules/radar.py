@@ -278,7 +278,7 @@ class Radar:
             eln_vals = np.mean(eln_vals)
             num_points += len(indices[0])
             save_point = 0
-            print("avg:", avg_pt)
+            #print("avg:", avg_pt)
 
             if num_points > 0:
                 avg_pt = np.array([[x_value, y_value, z_value, doppler_value,
