@@ -8,11 +8,15 @@ import numpy as np
 import csv
 import datetime
 
+
+radarConfig = input("Radar Config Auswahl mit entsprechender Nummer \nBest Range: 1 \nBest Range Resolution: 2 \nBest Velocity_Resolution: 3\n")
+
 # CSV Sachen
 aufzeichnung = input("Sollen die die Daten aufgezeichnet werden? Y/N ")
 if(aufzeichnung == "Y" or aufzeichnung == "y" or aufzeichnung == "Yes" or aufzeichnung == "yes" or aufzeichnung == "" ):
-    csv_datei = input("Bitte geben Sie einen Namen für die CSV-Datei ein (z. B. messungen.csv): ")
+    csv_datei = input("Bitte geben Sie einen Namen für die CSV-Datei ein (z. B. messungen): ")
     fieldnames = ['Zeitstempel', 'Objekt', 'Entfernung', 'Geschwindigkeit', 'SNR', 'noise']
+    csv_datei = csv_datei + "_RadarConf_" + radarConfig + ".csv"
 
 # Neue CSV-Datei mit den fieldnames erstellen
     with open(csv_datei, "w", newline="") as f:
@@ -31,6 +35,19 @@ Radar = Radar()
 #HEATMAP = HEATMAP()
 
 RADAR_CLI_PORT, RADAR_DATA_PORT, RADAR_CONFIG_FILE_PATH, DATA_STORAGE_FILE_PATH, DATA_STORAGE_FILE_NAME, IMAGE_STORAGE_FILE_PATH = Utils.get_radar_env()
+
+#Radar Config Auswahl
+RADAR_CONFIG_PREFIX_PATH="radar_config"
+
+if radarConfig == "1":
+    RADAR_CONFIG_FILE_NAME="Demo_Visualizer_Best_Range.cfg"
+elif radarConfig == "2":
+    RADAR_CONFIG_FILE_NAME="Demo_Visualizer_Best_Range_Res.cfg"
+elif radarConfig == "3":
+    RADAR_CONFIG_FILE_NAME="Demo_Visualizer_Best_Velocity_Res.cfg"
+RADAR_CONFIG_FILE_PATH = RADAR_CONFIG_PREFIX_PATH + "/" + RADAR_CONFIG_FILE_NAME
+print(RADAR_CONFIG_FILE_PATH)
+
 cli_serial, data_serial = Radar.start(
     RADAR_CLI_PORT, RADAR_DATA_PORT, RADAR_CONFIG_FILE_PATH)
 
@@ -87,7 +104,7 @@ def radar_thread_function():
             print("objekt Anzahl",detection_obj['numObj']) 
             print("Entfernungen",detection_obj['range'])
             ##Print ende
-            if(aufzeichnung == "Y"):
+            if(aufzeichnung == "Y" or aufzeichnung == "y" or aufzeichnung == "Yes" or aufzeichnung == "yes" or aufzeichnung == "" ):
             # Aktuellen Zeitstempel abrufen
                 zeitstempel = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             # Neue Zeile zur CSV-Datei hinzufügen
