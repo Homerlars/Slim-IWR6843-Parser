@@ -9,7 +9,7 @@ import csv
 import datetime
 
 
-radarConfig = input("Radar Config Auswahl mit entsprechender Nummer \nBest Range: 1 \nBest Range Resolution: 2 \nBest Velocity_Resolution: 3\n")
+radarConfig = input("Radar Config Auswahl mit entsprechender Nummer \nBest Range: 1 \nBest Range Resolution: 2 \nBest Velocity_Resolution: 3 \nLong Range + High Speed: 4 \nNo Clutter Longe Range High Speed: 5 \nMode: ")
 
 # CSV Sachen
 aufzeichnung = input("Sollen die die Daten aufgezeichnet werden? Y/N ")
@@ -45,6 +45,10 @@ elif radarConfig == "2":
     RADAR_CONFIG_FILE_NAME="Demo_Visualizer_Best_Range_Res.cfg"
 elif radarConfig == "3":
     RADAR_CONFIG_FILE_NAME="Demo_Visualizer_Best_Velocity_Res.cfg"
+elif radarConfig == "4":
+    RADAR_CONFIG_FILE_NAME="Demo_Visualizer_Best_Range_30fps_resRange0434_Range50_Velocity15_res2.cfg"
+elif radarConfig == "5":
+    RADAR_CONFIG_FILE_NAME="Demo_Visualizer_noClutter_Best_Range_30fps_resRange0434_Range50_Velocity15_res2.cfg"
 RADAR_CONFIG_FILE_PATH = RADAR_CONFIG_PREFIX_PATH + "/" + RADAR_CONFIG_FILE_NAME
 print(RADAR_CONFIG_FILE_PATH)
 
