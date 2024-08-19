@@ -106,7 +106,7 @@ def radar_thread_function():
             ##Print ende
             if(aufzeichnung == "Y" or aufzeichnung == "y" or aufzeichnung == "Yes" or aufzeichnung == "yes" or aufzeichnung == "" ):
             # Aktuellen Zeitstempel abrufen
-                zeitstempel = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                zeitstempel = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")[:-3]
             # Neue Zeile zur CSV-Datei hinzufügen
                 with open(csv_datei, "a", newline="") as f:
                     writer = csv.writer(f)
